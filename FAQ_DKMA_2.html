@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DKMA FAQ</title>
+    <style>
+        body {
+            background-image: url(Patientenkurve.jpg);
+            background-attachment: fixed;
+            background-size: cover;
+            position: relative;
+        }
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8); /* Semi-transparentes Weiß als Overlay-Farbe */
+            pointer-events: none;
+        }
+        .faq-item {
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .answer {
+            display: none;
+            margin-top: 5px;
+            background-color: white;
+            padding: 10px;
+        }
+        .image {
+            display: none;
+            float: right;
+            margin-left: 10px;
+            max-width: 100px;
+            background-color: transparent; /* Hintergrundfarbe für Bilder auf transparent setzen */
+        }
+        /* Hinzugefügte CSS-Eigenschaften für die Text- und Bildverblassen */
+        .faq-item h3, .faq-item .answer p, .faq-item .image {
+            backdrop-filter: blur(0px); /* Kein Verblassen für Text und Bilder */
+            color: #000; /* Schriftfarbe auf Schwarz setzen */
+            padding: 10px;
+        }
+        /* Hinzugefügte CSS-Eigenschaften für die Hauptüberschrift */
+        h1 {
+            backdrop-filter: blur(0px); /* Kein Verblassen für die Hauptüberschrift */
+            color: #000; /* Schriftfarbe auf Schwarz setzen */
+        }
+        /* Hinzugefügte CSS-Eigenschaften für das Suchfeld */
+        #searchInput {
+            backdrop-filter: blur(0px); /* Kein Verblassen für das Suchfeld */
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <h1>Hilfeseiten für die DKMA - FAQ (under construction)</h1>
+    <input type="text" id="searchInput" placeholder="Suche...">
+    
+    <div class="faq-item">
+        <h3>Wie trage ich einen ZVK ein, wenn der Patient damit von der ITS kommt?</h3>
+        <div class="answer">
+            <img src=2.jpg alt="Bild 1" class="image">
+            <p>...einen neuen Zugang anlegen, auswählen: bei Aufnahme vorhanden, korrektes ZVK-Anlagedatum eintragen (damit die Tage richtig gezählt werden)</p>
+            <p>in der Bemerkung kann dann noch die Station vermerkt werden, auf welcher der ZVK gelegt wurde</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <h3>Die Etiketten für die Medikamente werden nicht gedruckt</h3>
+        <div class="answer">
+            <img src="bild2.jpg" alt="Bild 2" class="image">
+            <p>Bitte arbeiten Sie mit der Stationsanmeldung im Orbis. Dort sollten die Drucker für die jeweilige Station angelegt sein</p>
+        </div>
+    </div>
+	
+	<div class="faq-item">
+        <h3>In der Stellliste sehe ich nicht alle Patienten der Station</h3>
+        <div class="answer">
+            <img src="bild2.jpg" alt="Bild 2" class="image">
+            <p>Filtereinstellungen im oberen Bereich</p>
+            <p>Patienten, für die vorher schon die Medikamente als verabreicht gekürzelt wurden, erscheinen nicht mehr in der Stellliste</p>
+        </div>
+    </div>
+
+	<div class="faq-item">
+        <h3>Müssen die Patienten weiterhin nach PPR eingestuft werden?</h3>
+        <div class="answer">
+            <img src="bild2.jpg" alt="Bild 2" class="image">
+            <p>Ja, die PPR Einstufung erfolgt weiter über die Liste, es ist noch keine automatische Generierung möglich</p>
+        </div>
+    </div>
+	
+    <!-- Weitere Fragen und Antworten hier einfügen -->
+
+    <script>
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('h3');
+            const answer = item.querySelector('.answer');
+            const image = item.querySelector('.image');
+
+            question.addEventListener('click', () => {
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+                image.style.display = image.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('h3').textContent.toLowerCase();
+                const answer = item.querySelector('.answer').textContent.toLowerCase();
+
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
